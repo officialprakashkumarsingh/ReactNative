@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="ai_message_bg">#343541</color>
+    <color name="black">#FF000000</color>
+    <color name="border_color">#565869</color>
+    <color name="chat_bg">#343541</color>
+    <color name="dark_bg">#212121</color>
+    <color name="darker_bg">#171717</color>
+    <color name="input_bg">#40414f</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="send_button">#19c37d</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="text_primary">#ececf1</color>
+    <color name="text_secondary">#8e8ea0</color>
+    <color name="user_message_bg">#444654</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="about">About</string>
+    <string name="aham_ai_title">AhamAI</string>
+    <string name="app_name">AhamAI</string>
+    <string name="chat_hint">Message AhamAI...</string>
+    <string name="clear_chat">Clear Chat</string>
+    <string name="menu">Menu</string>
+    <string name="new_chat">New Chat</string>
+    <string name="send">Send</string>
+    <string name="settings">Settings</string>
+    <string name="subtitle">Your AI Assistant</string>
+    <style name="Theme.AhamAI" parent="android:Theme.Material.NoActionBar">
+        
+        <item name="android:statusBarColor">@color/darker_bg</item>
+        <item name="android:navigationBarColor">@color/darker_bg</item>
+        <item name="android:windowLightStatusBar" ns1:targetApi="m">false</item>
+    </style>
+</resources>

@@ -1,52 +1,124 @@
 package com.ahamai.chatapp.ui
 
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ahamai.chatapp.data.ApiService
+import com.ahamai.chatapp.data.ChatMessage
 import com.ahamai.chatapp.data.Message
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onCompletion
 
 class ChatViewModel : ViewModel() {
+    private val apiService = ApiService()
     private val _messages = mutableStateListOf<Message>()
     val messages: List<Message> = _messages
+
+    var isLoading by mutableStateOf(false)
+        private set
+    
+    var errorMessage by mutableStateOf<String?>(null)
+        private set
+
+    var selectedModel by mutableStateOf("gpt-3.5-turbo")
+        private set
+
+    val availableModels = listOf("gpt-3.5-turbo", "gpt-4", "claude-3-sonnet")
 
     init {
         // Add welcome message
         _messages.add(
             Message(
-                content = "Hello! I'm AhamAI, your AI assistant. How can I help you today?",
+                content = "Hello! I'm AhamAI, your AI assistant powered by advanced language models. How can I help you today?",
                 isFromUser = false
             )
         )
     }
 
     fun sendMessage(content: String) {
-        if (content.isBlank()) return
+        if (content.isBlank() || isLoading) return
+
+        // Clear any previous error
+        errorMessage = null
 
         // Add user message
-        _messages.add(
-            Message(
-                content = content.trim(),
-                isFromUser = true
-            )
+        val userMessage = Message(
+            content = content.trim(),
+            isFromUser = true
         )
+        _messages.add(userMessage)
 
-        // Simulate AI response
+        // Create AI message placeholder for streaming
+        val aiMessage = Message(
+            content = "",
+            isFromUser = false,
+            isStreaming = true,
+            isComplete = false
+        )
+        _messages.add(aiMessage)
+
+        isLoading = true
+
         viewModelScope.launch {
-            delay(1000) // Simulate thinking time
-            val aiResponse = generateAIResponse(content.trim())
-            _messages.add(
-                Message(
-                    content = aiResponse,
-                    isFromUser = false
-                )
-            )
+            try {
+                // Convert messages to API format
+                val apiMessages = _messages
+                    .filter { it.isComplete } // Only include completed messages
+                    .map { message ->
+                        ChatMessage(
+                            role = if (message.isFromUser) "user" else "assistant",
+                            content = message.content
+                        )
+                    }
+
+                var accumulatedContent = ""
+                val aiMessageIndex = _messages.size - 1
+
+                apiService.streamChatCompletion(apiMessages)
+                    .catch { exception ->
+                        errorMessage = "Failed to get response: ${exception.message}"
+                        // Remove the incomplete AI message
+                        _messages.removeAt(aiMessageIndex)
+                    }
+                    .onCompletion {
+                        isLoading = false
+                        // Mark the AI message as complete
+                        if (aiMessageIndex < _messages.size) {
+                            val completedMessage = _messages[aiMessageIndex].copy(
+                                isStreaming = false,
+                                isComplete = true
+                            )
+                            _messages[aiMessageIndex] = completedMessage
+                        }
+                    }
+                    .collect { chunk ->
+                        accumulatedContent += chunk
+                        // Update the AI message with accumulated content
+                        if (aiMessageIndex < _messages.size) {
+                            val updatedMessage = _messages[aiMessageIndex].copy(
+                                content = accumulatedContent
+                            )
+                            _messages[aiMessageIndex] = updatedMessage
+                        }
+                    }
+            } catch (exception: Exception) {
+                isLoading = false
+                errorMessage = "Failed to send message: ${exception.message}"
+                // Remove the incomplete AI message
+                if (_messages.isNotEmpty() && !_messages.last().isFromUser) {
+                    _messages.removeAt(_messages.size - 1)
+                }
+            }
         }
     }
 
     fun clearChat() {
         _messages.clear()
+        errorMessage = null
         _messages.add(
             Message(
                 content = "Chat cleared! How can I help you today?",
@@ -55,26 +127,23 @@ class ChatViewModel : ViewModel() {
         )
     }
 
-    private fun generateAIResponse(userMessage: String): String {
-        // Simple response generator for demo purposes
-        return when {
-            userMessage.lowercase().contains("hello") || userMessage.lowercase().contains("hi") -> {
-                "Hello! It's great to meet you. How can I assist you today?"
-            }
-            userMessage.lowercase().contains("how are you") -> {
-                "I'm doing well, thank you for asking! I'm here and ready to help you with any questions or tasks you might have."
-            }
-            userMessage.lowercase().contains("what can you do") -> {
-                "I can help you with a wide variety of tasks including:\n\n• Answering questions\n• Writing and editing text\n• Explaining concepts\n• Problem-solving\n• Creative tasks\n• And much more!\n\nWhat would you like to work on?"
-            }
-            userMessage.lowercase().contains("bye") || userMessage.lowercase().contains("goodbye") -> {
-                "Goodbye! Feel free to come back anytime if you need assistance. Have a great day!"
-            }
-            userMessage.contains("?") -> {
-                "That's an interesting question! While I'm currently in demo mode, I'd be happy to help you explore that topic. In a full implementation, I would provide detailed, helpful responses to your queries."
-            }
-            else -> {
-                "Thank you for your message! I understand you're saying: \"$userMessage\"\n\nI'm currently running in demo mode, but I'm designed to be helpful, harmless, and honest. How else can I assist you today?"
+    fun selectModel(model: String) {
+        selectedModel = model
+    }
+
+    fun dismissError() {
+        errorMessage = null
+    }
+
+    fun retryLastMessage() {
+        if (_messages.isNotEmpty()) {
+            val lastUserMessage = _messages.findLast { it.isFromUser }
+            lastUserMessage?.let { message ->
+                // Remove any incomplete AI messages
+                while (_messages.isNotEmpty() && !_messages.last().isFromUser && !_messages.last().isComplete) {
+                    _messages.removeAt(_messages.size - 1)
+                }
+                sendMessage(message.content)
             }
         }
     }

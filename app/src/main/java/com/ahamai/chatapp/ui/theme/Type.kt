@@ -6,9 +6,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-// iOS-inspired typography with system font characteristics
-val iOSTypography = Typography(
-    // Large Title - iOS equivalent
+// Application typography
+val AppTypography = Typography(
+    // Large Title
     displayLarge = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Bold,
@@ -16,7 +16,7 @@ val iOSTypography = Typography(
         lineHeight = 41.sp,
         letterSpacing = 0.37.sp
     ),
-    // Title 1 - iOS equivalent
+    // Title 1
     displayMedium = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.SemiBold,
@@ -24,7 +24,7 @@ val iOSTypography = Typography(
         lineHeight = 34.sp,
         letterSpacing = 0.36.sp
     ),
-    // Title 2 - iOS equivalent
+    // Title 2
     displaySmall = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.SemiBold,
@@ -32,7 +32,7 @@ val iOSTypography = Typography(
         lineHeight = 28.sp,
         letterSpacing = 0.35.sp
     ),
-    // Title 3 - iOS equivalent
+    // Title 3
     headlineLarge = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.SemiBold,
@@ -40,7 +40,7 @@ val iOSTypography = Typography(
         lineHeight = 25.sp,
         letterSpacing = 0.38.sp
     ),
-    // Headline - iOS equivalent
+    // Headline
     headlineMedium = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.SemiBold,
@@ -48,7 +48,7 @@ val iOSTypography = Typography(
         lineHeight = 22.sp,
         letterSpacing = (-0.41).sp
     ),
-    // Body - iOS equivalent
+    // Body
     headlineSmall = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Medium,
@@ -64,7 +64,7 @@ val iOSTypography = Typography(
         lineHeight = 22.sp,
         letterSpacing = (-0.41).sp
     ),
-    // Callout - iOS equivalent
+    // Callout
     bodyMedium = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
@@ -72,7 +72,7 @@ val iOSTypography = Typography(
         lineHeight = 21.sp,
         letterSpacing = (-0.32).sp
     ),
-    // Subhead - iOS equivalent
+    // Subhead
     bodySmall = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
@@ -80,7 +80,7 @@ val iOSTypography = Typography(
         lineHeight = 20.sp,
         letterSpacing = (-0.24).sp
     ),
-    // Footnote - iOS equivalent
+    // Footnote
     labelLarge = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.SemiBold,
@@ -88,7 +88,7 @@ val iOSTypography = Typography(
         lineHeight = 18.sp,
         letterSpacing = (-0.08).sp
     ),
-    // Caption 1 - iOS equivalent
+    // Caption 1
     labelMedium = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Medium,
@@ -96,7 +96,7 @@ val iOSTypography = Typography(
         lineHeight = 16.sp,
         letterSpacing = 0.sp
     ),
-    // Caption 2 - iOS equivalent
+    // Caption 2
     labelSmall = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Medium,

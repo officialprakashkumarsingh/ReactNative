@@ -50,13 +50,13 @@ fun MessageBubble(
                     modifier = Modifier
                         .size(32.dp)
                         .clip(RoundedCornerShape(16.dp))
-                        .background(iOSSystemGray5),
+                        .background(Gray5),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         imageVector = Icons.Default.SmartToy,
                         contentDescription = "AI",
-                        tint = iOSSystemGray,
+                        tint = SecondaryColor,
                         modifier = Modifier.size(18.dp)
                     )
                 }
@@ -86,7 +86,7 @@ fun MessageBubble(
                         SelectionContainer {
                             Text(
                                 text = message.content,
-                                color = if (message.isFromUser) Color.White else iOSLabel,
+                                color = if (message.isFromUser) Color.White else TextPrimary,
                                 fontSize = 16.sp,
                                 lineHeight = 20.sp,
                                 fontFamily = if (message.content.contains("```")) FontFamily.Monospace else FontFamily.Default
@@ -101,13 +101,13 @@ fun MessageBubble(
                                 CircularProgressIndicator(
                                     modifier = Modifier.size(12.dp),
                                     strokeWidth = 1.5.dp,
-                                    color = if (message.isFromUser) Color.White.copy(alpha = 0.7f) else iOSSystemGray
+                                    color = if (message.isFromUser) Color.White.copy(alpha = 0.7f) else SecondaryColor
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
                                     text = "Thinking...",
                                     fontSize = 12.sp,
-                                    color = if (message.isFromUser) Color.White.copy(alpha = 0.7f) else iOSSecondaryLabel,
+                                    color = if (message.isFromUser) Color.White.copy(alpha = 0.7f) else TextSecondary,
                                     fontWeight = FontWeight.Medium
                                 )
                             }
@@ -119,7 +119,7 @@ fun MessageBubble(
                 Text(
                     text = dateFormatter.format(Date(message.timestamp)),
                     fontSize = 11.sp,
-                    color = iOSTertiaryLabel,
+                    color = TextTertiary,
                     modifier = Modifier
                         .padding(
                             top = 4.dp,

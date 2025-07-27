@@ -108,7 +108,7 @@ fun ChatScreen(
                 )
             }
         },
-        containerColor = iOSGroupedBackground,
+        containerColor = GroupedBackground,
         modifier = Modifier.fillMaxSize()
     ) { paddingValues ->
         Box(
@@ -133,13 +133,13 @@ fun ChatScreen(
                     Text(
                         text = "Welcome to AhamAI",
                         style = MaterialTheme.typography.headlineMedium,
-                        color = iOSLabel
+                        color = TextPrimary
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "Start a conversation by typing a message below",
                         style = MaterialTheme.typography.bodyLarge,
-                        color = iOSSecondaryLabel
+                        color = TextSecondary
                     )
                 }
             } else {
@@ -147,7 +147,7 @@ fun ChatScreen(
                     state = listState,
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(iOSGroupedBackground),
+                        .background(GroupedBackground),
                     contentPadding = PaddingValues(vertical = 8.dp)
                 ) {
                     items(
@@ -183,13 +183,13 @@ fun LoadingIndicator(
             CircularProgressIndicator(
                 modifier = Modifier.size(16.dp),
                 strokeWidth = 2.dp,
-                color = iOSSystemBlue
+                color = PrimaryColor
             )
             Spacer(modifier = Modifier.width(12.dp))
             Text(
                 text = "AhamAI is thinking...",
                 style = MaterialTheme.typography.bodyMedium,
-                color = iOSSecondaryLabel
+                color = TextSecondary
             )
         }
     }

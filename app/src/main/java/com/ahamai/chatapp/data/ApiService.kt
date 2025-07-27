@@ -27,8 +27,9 @@ class ApiService {
         })
         .build()
 
-    suspend fun streamChatCompletion(messages: List<ChatMessage>): Flow<String> = flow {
+    suspend fun streamChatCompletion(model: String, messages: List<ChatMessage>): Flow<String> = flow {
         val request = ChatRequest(
+            model = model,
             messages = messages,
             stream = true
         )
@@ -92,7 +93,25 @@ class ApiService {
     }
 
     suspend fun getAvailableModels(): List<String> {
-        // Return default models for now
-        return listOf("gpt-3.5-turbo", "gpt-4", "claude-3-sonnet")
+        val request = Request.Builder()
+            .url("$baseUrl/v1/models")
+            .addHeader("Authorization", "Bearer $apiKey")
+            .build()
+
+        val response = client.newCall(request).execute()
+        if (!response.isSuccessful) {
+            response.close()
+            throw Exception("API call failed: ${response.code}")
+        }
+
+        val body = response.body?.string() ?: throw Exception("Empty response body")
+        response.close()
+
+        return try {
+            val modelsResponse = gson.fromJson(body, ModelsResponse::class.java)
+            modelsResponse.data.map { it.id }
+        } catch (e: Exception) {
+            throw Exception("Failed to parse models")
+        }
     }
 }

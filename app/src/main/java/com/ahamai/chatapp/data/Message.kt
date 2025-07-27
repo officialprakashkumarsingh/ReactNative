@@ -46,3 +46,11 @@ data class Usage(
     val completion_tokens: Int,
     val total_tokens: Int
 )
+
+data class ModelsResponse(
+    val data: List<Model>
+)
+
+data class Model(
+    val id: String
+)

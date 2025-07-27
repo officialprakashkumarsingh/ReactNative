@@ -27,7 +27,7 @@ class ChatViewModel : ViewModel() {
     var selectedModel by mutableStateOf("gpt-3.5-turbo")
         private set
 
-    val availableModels = listOf("gpt-3.5-turbo", "gpt-4", "claude-3-sonnet")
+    var availableModels by mutableStateOf(listOf<String>())
 
     init {
         // Add welcome message
@@ -37,6 +37,16 @@ class ChatViewModel : ViewModel() {
                 isFromUser = false
             )
         )
+
+        // Fetch available models
+        viewModelScope.launch {
+            availableModels = try {
+                apiService.getAvailableModels()
+            } catch (_: Exception) {
+                listOf("gpt-3.5-turbo")
+            }
+            selectedModel = availableModels.firstOrNull() ?: selectedModel
+        }
     }
 
     fun sendMessage(content: String) {
@@ -78,7 +88,7 @@ class ChatViewModel : ViewModel() {
                 var accumulatedContent = ""
                 val aiMessageIndex = _messages.size - 1
 
-                apiService.streamChatCompletion(apiMessages)
+                apiService.streamChatCompletion(selectedModel, apiMessages)
                     .catch { exception ->
                         errorMessage = "Failed to get response: ${exception.message}"
                         // Remove the incomplete AI message

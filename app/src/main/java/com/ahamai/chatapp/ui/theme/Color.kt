@@ -2,38 +2,38 @@ package com.ahamai.chatapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// iOS-inspired minimalistic colors
-val iOSSystemBlue = Color(0xFF007AFF)
-val iOSSystemGray = Color(0xFF8E8E93)
-val iOSSystemGray2 = Color(0xFFAEAEB2)
-val iOSSystemGray3 = Color(0xFFC7C7CC)
-val iOSSystemGray4 = Color(0xFFD1D1D6)
-val iOSSystemGray5 = Color(0xFFE5E5EA)
-val iOSSystemGray6 = Color(0xFFF2F2F7)
+// Application color palette (Material style)
+val PrimaryColor = Color(0xFF6750A4)
+val SecondaryColor = Color(0xFF625B71)
+val Gray2 = Color(0xFF938F99)
+val Gray3 = Color(0xFFE7E0EC)
+val Gray4 = Color(0xFFCAC4D0)
+val Gray5 = Color(0xFFE8DEF8)
+val Gray6 = Color(0xFFF4EFF4)
 
 // Background colors
-val iOSBackground = Color(0xFFFFFFFF)
-val iOSSecondaryBackground = Color(0xFFF2F2F7)
-val iOSGroupedBackground = Color(0xFFF2F2F7)
+val BackgroundColor = Color(0xFFFFFFFF)
+val SecondaryBackground = Color(0xFFF4EFF4)
+val GroupedBackground = Color(0xFFF4EFF4)
 
 // Text colors
-val iOSLabel = Color(0xFF000000)
-val iOSSecondaryLabel = Color(0xFF3C3C43).copy(alpha = 0.6f)
-val iOSTertiaryLabel = Color(0xFF3C3C43).copy(alpha = 0.3f)
+val TextPrimary = Color(0xFF1C1B1F)
+val TextSecondary = Color(0xFF49454F)
+val TextTertiary = Color(0xFF79747E)
 
 // Chat specific colors
-val UserMessageBackground = iOSSystemBlue
-val AssistantMessageBackground = iOSSystemGray6
+val UserMessageBackground = PrimaryColor
+val AssistantMessageBackground = Gray6
 val MessageInputBackground = Color(0xFFFFFFFF)
-val MessageInputBorder = iOSSystemGray4
+val MessageInputBorder = Gray4
 
 // Accent colors
-val AccentColor = iOSSystemBlue
-val SuccessColor = Color(0xFF34C759)
-val ErrorColor = Color(0xFFFF3B30)
-val WarningColor = Color(0xFFFF9500)
+val AccentColor = PrimaryColor
+val SuccessColor = Color(0xFF4CAF50)
+val ErrorColor = Color(0xFFF44336)
+val WarningColor = Color(0xFFFF9800)
 
 // Dark mode colors (for future use)
-val iOSBackgroundDark = Color(0xFF000000)
-val iOSSecondaryBackgroundDark = Color(0xFF1C1C1E)
-val iOSLabelDark = Color(0xFFFFFFFF)
+val BackgroundColorDark = Color(0xFF000000)
+val SecondaryBackgroundDark = Color(0xFF121212)
+val TextPrimaryDark = Color(0xFFFFFFFF)

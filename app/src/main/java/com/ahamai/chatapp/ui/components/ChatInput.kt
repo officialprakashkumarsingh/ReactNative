@@ -46,7 +46,7 @@ fun ChatInput(
 
     Surface(
         modifier = modifier.fillMaxWidth(),
-        color = iOSBackground,
+        color = BackgroundColor,
         shadowElevation = 1.dp
     ) {
         Column {
@@ -55,7 +55,7 @@ fun ChatInput(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(0.5.dp)
-                    .background(iOSSystemGray4)
+                    .background(Gray4)
             )
             
             Row(
@@ -71,7 +71,7 @@ fun ChatInput(
                         .clip(RoundedCornerShape(20.dp))
                         .border(
                             width = 1.dp,
-                            color = if (text.isNotEmpty()) iOSSystemBlue else iOSSystemGray4,
+                            color = if (text.isNotEmpty()) PrimaryColor else Gray4,
                             shape = RoundedCornerShape(20.dp)
                         )
                         .background(MessageInputBackground)
@@ -87,9 +87,9 @@ fun ChatInput(
                                 .weight(1f)
                                 .focusRequester(focusRequester),
                             textStyle = MaterialTheme.typography.bodyLarge.copy(
-                                color = iOSLabel
+                                color = TextPrimary
                             ),
-                            cursorBrush = SolidColor(iOSSystemBlue),
+                            cursorBrush = SolidColor(PrimaryColor),
                             keyboardOptions = KeyboardOptions(
                                 capitalization = KeyboardCapitalization.Sentences,
                                 imeAction = ImeAction.Send
@@ -103,7 +103,7 @@ fun ChatInput(
                                     Text(
                                         text = "Message",
                                         style = MaterialTheme.typography.bodyLarge,
-                                        color = iOSSecondaryLabel
+                                        color = TextSecondary
                                     )
                                 }
                                 innerTextField()
@@ -122,8 +122,8 @@ fun ChatInput(
                         .size(36.dp)
                         .clip(RoundedCornerShape(18.dp))
                         .background(
-                            if (text.isNotBlank() && !isLoading) iOSSystemBlue 
-                            else iOSSystemGray4
+                            if (text.isNotBlank() && !isLoading) PrimaryColor 
+                            else Gray4
                         )
                 ) {
                     if (isLoading) {
@@ -168,10 +168,10 @@ fun ModelSelector(
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
             modifier = Modifier.menuAnchor(),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = iOSSystemBlue,
-                unfocusedBorderColor = iOSSystemGray3,
-                focusedLabelColor = iOSSystemBlue,
-                unfocusedLabelColor = iOSSystemGray
+                focusedBorderColor = PrimaryColor,
+                unfocusedBorderColor = Gray3,
+                focusedLabelColor = PrimaryColor,
+                unfocusedLabelColor = SecondaryColor
             )
         )
         
@@ -196,7 +196,7 @@ fun ModelSelector(
                             Icon(
                                 imageVector = Icons.Default.Check,
                                 contentDescription = "Selected",
-                                tint = iOSSystemBlue
+                                tint = PrimaryColor
                             )
                         }
                     } else null

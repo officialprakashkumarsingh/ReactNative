@@ -19,7 +19,7 @@ import com.ahamai.chatapp.ui.theme.*
 @Composable
 fun ChatHeader(
     selectedModel: String = "gpt-3.5-turbo",
-    availableModels: List<String> = listOf("gpt-3.5-turbo", "gpt-4", "claude-3-sonnet"),
+    availableModels: List<String> = emptyList(),
     onModelSelected: (String) -> Unit = {},
     onClearChat: () -> Unit = {},
     onRetry: () -> Unit = {},
@@ -30,7 +30,7 @@ fun ChatHeader(
 
     Surface(
         modifier = modifier.fillMaxWidth(),
-        color = iOSBackground,
+        color = BackgroundColor,
         shadowElevation = 0.5.dp
     ) {
         Column {
@@ -41,12 +41,12 @@ fun ChatHeader(
                             text = "AhamAI",
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.SemiBold,
-                            color = iOSLabel
+                            color = TextPrimary
                         )
                         Text(
                             text = selectedModel,
                             style = MaterialTheme.typography.labelMedium,
-                            color = iOSSecondaryLabel
+                            color = TextSecondary
                         )
                     }
                 },
@@ -58,7 +58,7 @@ fun ChatHeader(
                                 .size(20.dp)
                                 .padding(end = 8.dp),
                             strokeWidth = 2.dp,
-                            color = iOSSystemBlue
+                            color = PrimaryColor
                         )
                     } else {
                         IconButton(
@@ -67,7 +67,7 @@ fun ChatHeader(
                             Icon(
                                 imageVector = Icons.Default.Refresh,
                                 contentDescription = "Retry",
-                                tint = iOSSystemBlue
+                                tint = PrimaryColor
                             )
                         }
                     }
@@ -80,7 +80,7 @@ fun ChatHeader(
                             Icon(
                                 imageVector = Icons.Default.MoreVert,
                                 contentDescription = "More options",
-                                tint = iOSSystemBlue
+                                tint = PrimaryColor
                             )
                         }
                         
@@ -92,7 +92,7 @@ fun ChatHeader(
                             Text(
                                 text = "Select Model",
                                 style = MaterialTheme.typography.labelLarge,
-                                color = iOSSecondaryLabel,
+                                color = TextSecondary,
                                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
                             )
                             
@@ -105,14 +105,14 @@ fun ChatHeader(
                                             Text(
                                                 text = model,
                                                 style = MaterialTheme.typography.bodyMedium,
-                                                color = iOSLabel
+                                                color = TextPrimary
                                             )
                                             if (model == selectedModel) {
                                                 Spacer(modifier = Modifier.width(8.dp))
                                                 Icon(
                                                     imageVector = Icons.Default.Check,
                                                     contentDescription = "Selected",
-                                                    tint = iOSSystemBlue,
+                                                    tint = PrimaryColor,
                                                     modifier = Modifier.size(16.dp)
                                                 )
                                             }
@@ -126,7 +126,7 @@ fun ChatHeader(
                             }
                             
                             Divider(
-                                color = iOSSystemGray5,
+                                color = Gray5,
                                 modifier = Modifier.padding(vertical = 4.dp)
                             )
                             
@@ -148,9 +148,9 @@ fun ChatHeader(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = iOSBackground,
-                    titleContentColor = iOSLabel,
-                    actionIconContentColor = iOSSystemBlue
+                    containerColor = BackgroundColor,
+                    titleContentColor = TextPrimary,
+                    actionIconContentColor = PrimaryColor
                 )
             )
             
@@ -159,7 +159,7 @@ fun ChatHeader(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(0.5.dp)
-                    .background(iOSSystemGray4)
+                    .background(Gray4)
             )
         }
     }
@@ -197,7 +197,7 @@ fun StatusIndicator(
                 else -> "Offline"
             },
             style = MaterialTheme.typography.labelSmall,
-            color = iOSSecondaryLabel
+            color = TextSecondary
         )
     }
 }

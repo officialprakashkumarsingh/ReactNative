@@ -194,6 +194,12 @@ attr indeterminateProgressStyle
 attr initialActivityCount
 attr isLightTheme
 attr itemPadding
+attr jlmv_alignHorizontal
+attr jlmv_alignVertical
+attr jlmv_background
+attr jlmv_latex
+attr jlmv_textColor
+attr jlmv_textSize
 attr lStar
 attr lastBaselineToBottomHeight
 attr launchSingleTop
@@ -749,6 +755,7 @@ id beginning
 id blocking
 id bottom
 id buttonPanel
+id center
 id center_vertical
 id checkbox
 id checked
@@ -788,6 +795,8 @@ id line1
 id line3
 id listMode
 id list_item
+id markwon_drawables_scheduler
+id markwon_drawables_scheduler_last_text_hashcode
 id message
 id middle
 id multiply
@@ -833,6 +842,7 @@ id split_action_bar
 id src_atop
 id src_in
 id src_over
+id start
 id submenuarrow
 id submit_area
 id tabMode
@@ -1429,6 +1439,7 @@ styleable Fragment android_name android_id android_tag
 styleable FragmentContainerView android_name android_tag
 styleable GradientColor android_startColor android_endColor android_type android_centerX android_centerY android_gradientRadius android_tileMode android_centerColor android_startX android_startY android_endX android_endY
 styleable GradientColorItem android_color android_offset
+styleable JLatexMathView jlmv_alignHorizontal jlmv_alignVertical jlmv_background jlmv_latex jlmv_textColor jlmv_textSize
 styleable LinearLayoutCompat android_gravity android_orientation android_baselineAligned android_baselineAlignedChildIndex android_weightSum divider dividerPadding measureWithLargestChild showDividers
 styleable LinearLayoutCompat_Layout android_layout_gravity android_layout_width android_layout_height android_layout_weight
 styleable ListPopupWindow android_dropDownHorizontalOffset android_dropDownVerticalOffset

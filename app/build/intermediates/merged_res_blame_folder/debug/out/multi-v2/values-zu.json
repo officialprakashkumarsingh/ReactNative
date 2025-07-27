@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.ahamai.chatapp-mergeDebugResources-55:/values-zu/values-zu.xml",
+            "outputFile": "com.ahamai.chatapp-mergeDebugResources-57:/values-zu/values-zu.xml",
             "map": [
                 {
                     "source": "/home/ubuntu/.gradle/caches/transforms-3/15e0ad653093ed238cbf86957a736be0/transformed/material3-1.1.2/res/values-zu/values-zu.xml",

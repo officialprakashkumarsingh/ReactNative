@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.ahamai.chatapp-mergeDebugResources-55:/values-bn/values-bn.xml",
+            "outputFile": "com.ahamai.chatapp-mergeDebugResources-57:/values-bn/values-bn.xml",
             "map": [
                 {
                     "source": "/home/ubuntu/.gradle/caches/transforms-3/96fa24ce9bad35adf9f5fbf7cca4539b/transformed/core-1.12.0/res/values-bn/values-bn.xml",

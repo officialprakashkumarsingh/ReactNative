@@ -61,6 +61,10 @@
                 android:name="androidx.profileinstaller.ProfileInstallerInitializer"
                 android:value="androidx.startup" />
         </provider>
+        <provider
+            android:name="ru.noties.jlatexmath.JLatexMathInitProvider"
+            android:authorities="com.ahamai.chatapp.jlatexmathinitprovider"
+            android:exported="false" />
 
         <receiver
             android:name="androidx.profileinstaller.ProfileInstallReceiver"

@@ -1,5 +1,6 @@
 package com.ahamai.chatapp.ui.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -8,9 +9,10 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,6 +27,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.ahamai.chatapp.ui.theme.*
 
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ChatInput(
     onSendMessage: (String) -> Unit,
@@ -32,14 +35,12 @@ fun ChatInput(
     modifier: Modifier = Modifier
 ) {
     var text by remember { mutableStateOf("") }
-    val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = remember { FocusRequester() }
 
     val sendMessage = {
         if (text.isNotBlank() && !isLoading) {
             onSendMessage(text)
             text = ""
-            keyboardController?.hide()
         }
     }
 
@@ -133,7 +134,7 @@ fun ChatInput(
                         )
                     } else {
                         Icon(
-                            imageVector = Icons.AutoMirrored.Filled.Send,
+                            imageVector = Icons.Filled.Send,
                             contentDescription = "Send",
                             tint = Color.White,
                             modifier = Modifier.size(18.dp)
